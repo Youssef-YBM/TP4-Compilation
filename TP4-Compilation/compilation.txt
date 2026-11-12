@@ -1,0 +1,90 @@
+TP4 - Compilation : Analyseur lexical (automate)
+Commandes de compilation et d'execution (testees avec gcc, MSYS2 UCRT64)
+=========================================================================
+
+Se placer dans le dossier du TP :
+    cd TP4-Compilation
+
+Fichier d'entree (input.txt) :
+    iden lf  ok 5 ;
+    = >= <= < = > =
+    f& 2.5;
+    f
+
+    5*/
+    5 ir"'"
+    sisinon alorsi sialors si alors if sinon si
+
+-------------------------------------------------------------------------
+1) main.c  (analyseur a base d'automate)
+-------------------------------------------------------------------------
+Compilation :
+    gcc main.c -o Automate.exe
+
+Execution :
+    .\Automate.exe          (PowerShell / cmd)
+    ./Automate.exe          (Git Bash / Linux)
+
+Lit input.txt, ecrit les unites lexicales dans sortie_analyseur.txt.
+
+Affichage console (caracteres inconnus) :
+    Ce character: ; est inconnue; --{Verifier Ligne : 1}--
+    Ce character: & est inconnue; --{Verifier Ligne : 3}--
+    Ce character: ; est inconnue; --{Verifier Ligne : 3}--
+    Ce character: * est inconnue; --{Verifier Ligne : 6}--
+    Ce character: / est inconnue; --{Verifier Ligne : 6}--
+    Ce character: " est inconnue; --{Verifier Ligne : 7}--
+    Ce character: ' est inconnue; --{Verifier Ligne : 7}--
+    Ce character: " est inconnue; --{Verifier Ligne : 7}--
+
+Contenu de sortie_analyseur.txt :
+    ID ID ID NB
+    OPREL OPREL OPREL OPREL OPREL OPREL OPREL
+    ID NB
+    ID
+    NB
+    NB ID
+    ID ID ID SI ALORS ID SINON SI
+
+-------------------------------------------------------------------------
+2) Lexer.c  (analyseur lexical, version avec options)
+-------------------------------------------------------------------------
+Usage : Lexer [-v] [input.txt [sortie_analyseur.txt]]
+        -v : mode verbeux (TOKEN 'lexeme' (line N))
+
+Compilation :
+    gcc Lexer.c -o Lexer.exe
+
+Execution :
+    .\Lexer.exe -v input.txt sortie_analyseur.txt
+
+Affichage console (erreurs) :
+    Unknown character ';' (0x3B) in line 1
+    Unknown character '&' (0x26) in line 3
+    Unknown character ';' (0x3B) in line 3
+    Unknown character '*' (0x2A) in line 6
+    Unknown character '/' (0x2F) in line 6
+    Unknown character '"' (0x22) in line 7
+    Unknown character ''' (0x27) in line 7
+    Unknown character '"' (0x22) in line 7
+
+Extrait du mode verbeux :
+    ID    'iden' (line 1)
+    ID    'lf' (line 1)
+    ID    'ok' (line 1)
+    NB    '5' (line 1)
+    OPREL '=' (line 2)
+    OPREL '>=' (line 2)
+    ...
+    NB    '2.5' (line 3)
+    ...
+    SI    'si' (line 8)
+    ALORS 'alors' (line 8)
+    ID    'if' (line 8)
+    SINON 'sinon' (line 8)
+    SI    'si' (line 8)
+
+-------------------------------------------------------------------------
+Option : avertissements
+    gcc -Wall -Wextra main.c -o Automate.exe
+    gcc -Wall -Wextra Lexer.c -o Lexer.exe
