@@ -1,0 +1,44 @@
+TP4 - Compilation : Analyseur lexical (automate)
+=================================================
+
+Prerequis : gcc (MinGW / MSYS2). Se placer dans le dossier du TP :
+
+    cd TP4-Compilation
+
+-------------------------------------------------
+1) Version automate (main.c)
+-------------------------------------------------
+Lit "input.txt" et ecrit le resultat dans "sortie_analyseur.txt".
+
+Compilation :
+    gcc main.c -o Automate.exe
+
+Execution (PowerShell / cmd) :
+    .\Automate.exe
+
+Execution (Git Bash / Linux) :
+    ./Automate.exe
+
+Voir le resultat :
+    type sortie_analyseur.txt        (cmd / PowerShell : Get-Content sortie_analyseur.txt)
+    cat sortie_analyseur.txt         (Git Bash / Linux)
+
+-------------------------------------------------
+2) Version Lexer (Lexer.c)
+-------------------------------------------------
+Usage : lexer [-v] [input.txt [sortie_analyseur.txt]]
+  -v : mode verbeux (affiche "TOKEN 'lexeme' (line N)")
+
+Compilation :
+    gcc Lexer.c -o Lexer.exe
+
+Execution :
+    .\Lexer.exe                                   (fichiers par defaut)
+    .\Lexer.exe input.txt sortie_analyseur.txt    (fichiers explicites)
+    .\Lexer.exe -v input.txt sortie_analyseur.txt (mode verbeux)
+
+-------------------------------------------------
+Option : compilation avec avertissements
+-------------------------------------------------
+    gcc -Wall -Wextra main.c -o Automate.exe
+    gcc -Wall -Wextra Lexer.c -o Lexer.exe
