@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 FILE* code_source=NULL;
- FILE* output =NULL;
+FILE* output =NULL;
 int state=0 ;// pour garder l'etat de l'automate
 int nb_ligne = 1;
 int new_line =  0;
